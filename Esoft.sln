@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31424.327
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Esoft", "Esoft\Esoft.csproj", "{1CB1715E-C1B5-48AD-A55E-CF51D92D56B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Esoft.Core", "Esoft.Core\Esoft.Core.csproj", "{6D08BD0C-A745-4A0F-B841-2E0D8AA3274E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1CB1715E-C1B5-48AD-A55E-CF51D92D56B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CB1715E-C1B5-48AD-A55E-CF51D92D56B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CB1715E-C1B5-48AD-A55E-CF51D92D56B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CB1715E-C1B5-48AD-A55E-CF51D92D56B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D08BD0C-A745-4A0F-B841-2E0D8AA3274E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D08BD0C-A745-4A0F-B841-2E0D8AA3274E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D08BD0C-A745-4A0F-B841-2E0D8AA3274E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D08BD0C-A745-4A0F-B841-2E0D8AA3274E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F87D1E61-DCE5-4EE2-8862-DDB7F25D3853}
+	EndGlobalSection
+EndGlobal
