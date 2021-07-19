@@ -1,7 +1,9 @@
+using Esoft.Core.Entity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -16,9 +18,11 @@ namespace Esoft
 {
 	public class Startup
 	{
+		public string ConnectionString;
 		public Startup(IConfiguration configuration)
 		{
 			Configuration = configuration;
+			ConnectionString = Configuration.GetConnectionString("DefaultConnectionString");
 		}
 
 		public IConfiguration Configuration { get; }
@@ -26,7 +30,7 @@ namespace Esoft
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-
+			services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(ConnectionString));
 			services.AddControllers();
 			services.AddSwaggerGen(c =>
 			{
