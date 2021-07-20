@@ -1,4 +1,5 @@
-﻿using Esoft.Core.Entity.Data.CourseModels;
+﻿using Esoft.Core.Entity.Data;
+using Esoft.Core.Entity.Data.CourseModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,8 @@ namespace Esoft.Core.Entity
 		public DbSet<CourseRequirement> CourseRequirements { get; set; }
 		public DbSet<CourseStructure> CourseStructures { get; set; }
 
+		public DbSet<Student> Students { get; set; }
+
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			// course entity
@@ -39,6 +42,18 @@ namespace Esoft.Core.Entity
 				.HasOne<Course>(c => c.Course)
 				.WithMany(c => c.CourseStructure)
 				.HasForeignKey(c => c.CourseId);
+
+			// student entity
+			//modelBuilder.Entity<Student>()
+			//	.HasMany(s => s.Courses)
+			//	.WithMany(c => c.Students)
+			//	.Map(sc =>
+			//	{
+			//		sc.MapLeftKey("StudentId");
+			//		sc.MapRightKey("CourseId");
+			//		sc.ToTable("Student_Course");
+			//	});
+				
 				
 		}
 

@@ -18,6 +18,7 @@ namespace Esoft.Core.Entity.Data.CourseModels
 		public string Description { get; set; }
 		public ICollection<CourseRequirement> CourseRequirements { get; set; }
 		public ICollection<CourseStructure> CourseStructure { get; set; }
+		public ICollection<Student> Students { get; set; }
 
 		// navigation properties
 		public int CourseCategoryId { get; set; }
