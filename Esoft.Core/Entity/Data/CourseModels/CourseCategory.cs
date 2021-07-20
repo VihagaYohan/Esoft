@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Esoft.Core.Entity.Data
+namespace Esoft.Core.Entity.Data.CourseModels
 {
 	public class CourseCategory:BaseEntity
 	{
@@ -15,5 +15,6 @@ namespace Esoft.Core.Entity.Data
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int Id { get; set; }
 		public string CategoryName { get; set; }
+		public ICollection<Course> Courses { get; set; }
 	}
 }
