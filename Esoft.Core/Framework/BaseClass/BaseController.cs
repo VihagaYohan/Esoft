@@ -21,9 +21,15 @@ namespace Esoft.Core.Framework.BaseClass
 			{
 				code = new ResponseCodeData { Message = "Success", Status = 0, HttpStatusCode = StatusCodes.Status200OK };
 			}
-			return null;
+
+			var response = new
+			{
+				code = new { Message = code.Message, Status = code.Status },
+				data = data
+			};
+			return StatusCode(code.HttpStatusCode, response);
 		}
 
-
+	
 	}
 }

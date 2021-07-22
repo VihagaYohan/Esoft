@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Esoft.Core.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210720083740_AddedCourseRequirement")]
-    partial class AddedCourseRequirement
+    [Migration("20210721010711_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,21 @@ namespace Esoft.Core.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.8")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("CourseStudent", b =>
+                {
+                    b.Property<int>("CoursesCourseId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StudentsStudentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CoursesCourseId", "StudentsStudentId");
+
+                    b.HasIndex("StudentsStudentId");
+
+                    b.ToTable("CourseStudent");
+                });
 
             modelBuilder.Entity("Esoft.Core.Entity.Data.CourseModels.Course", b =>
                 {
@@ -93,6 +108,73 @@ namespace Esoft.Core.Migrations
                     b.ToTable("CourseRequirements");
                 });
 
+            modelBuilder.Entity("Esoft.Core.Entity.Data.CourseModels.CourseStructure", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeleteAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Lesson")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("CourseStructures");
+                });
+
+            modelBuilder.Entity("Esoft.Core.Entity.Data.Student", b =>
+                {
+                    b.Property<int>("StudentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeleteAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("StudentId");
+
+                    b.ToTable("Students");
+                });
+
+            modelBuilder.Entity("CourseStudent", b =>
+                {
+                    b.HasOne("Esoft.Core.Entity.Data.CourseModels.Course", null)
+                        .WithMany()
+                        .HasForeignKey("CoursesCourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Esoft.Core.Entity.Data.Student", null)
+                        .WithMany()
+                        .HasForeignKey("StudentsStudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Esoft.Core.Entity.Data.CourseModels.Course", b =>
                 {
                     b.HasOne("Esoft.Core.Entity.Data.CourseModels.CourseCategory", "CourseCategory")
@@ -115,9 +197,22 @@ namespace Esoft.Core.Migrations
                     b.Navigation("Course");
                 });
 
+            modelBuilder.Entity("Esoft.Core.Entity.Data.CourseModels.CourseStructure", b =>
+                {
+                    b.HasOne("Esoft.Core.Entity.Data.CourseModels.Course", "Course")
+                        .WithMany("CourseStructure")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+                });
+
             modelBuilder.Entity("Esoft.Core.Entity.Data.CourseModels.Course", b =>
                 {
                     b.Navigation("CourseRequirements");
+
+                    b.Navigation("CourseStructure");
                 });
 
             modelBuilder.Entity("Esoft.Core.Entity.Data.CourseModels.CourseCategory", b =>

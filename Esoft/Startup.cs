@@ -1,3 +1,5 @@
+using Esoft.Core.BusinessLogic.Interface;
+using Esoft.Core.BusinessLogic.Service;
 using Esoft.Core.Entity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -36,6 +38,8 @@ namespace Esoft
 			{
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "Esoft", Version = "v1" });
 			});
+
+			services.AddScoped<ICourseCategoryService, CategoryService>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,6 +62,9 @@ namespace Esoft
 			{
 				endpoints.MapControllers();
 			});
+
+			// calling DbSeed method
+			DbSeed.Seed(app);
 		}
 	}
 }

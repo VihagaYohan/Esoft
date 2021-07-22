@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Esoft.Core.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210720084345_AddCourseStructure")]
-    partial class AddCourseStructure
+    [Migration("20210721011840_ChangesToCourseTable")]
+    partial class ChangesToCourseTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,9 +21,24 @@ namespace Esoft.Core.Migrations
                 .HasAnnotation("ProductVersion", "5.0.8")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("CourseStudent", b =>
+                {
+                    b.Property<int>("CoursesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StudentsStudentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CoursesId", "StudentsStudentId");
+
+                    b.HasIndex("StudentsStudentId");
+
+                    b.ToTable("CourseStudent");
+                });
+
             modelBuilder.Entity("Esoft.Core.Entity.Data.CourseModels.Course", b =>
                 {
-                    b.Property<int>("CourseId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -44,7 +59,7 @@ namespace Esoft.Core.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("CourseId");
+                    b.HasKey("Id");
 
                     b.HasIndex("CourseCategoryId");
 
@@ -118,6 +133,46 @@ namespace Esoft.Core.Migrations
                     b.HasIndex("CourseId");
 
                     b.ToTable("CourseStructures");
+                });
+
+            modelBuilder.Entity("Esoft.Core.Entity.Data.Student", b =>
+                {
+                    b.Property<int>("StudentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeleteAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("StudentId");
+
+                    b.ToTable("Students");
+                });
+
+            modelBuilder.Entity("CourseStudent", b =>
+                {
+                    b.HasOne("Esoft.Core.Entity.Data.CourseModels.Course", null)
+                        .WithMany()
+                        .HasForeignKey("CoursesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Esoft.Core.Entity.Data.Student", null)
+                        .WithMany()
+                        .HasForeignKey("StudentsStudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Esoft.Core.Entity.Data.CourseModels.Course", b =>

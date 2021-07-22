@@ -11,18 +11,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ApiInputModels\" />
     <Folder Include="ApiOutputModels\" />
-    <Folder Include="BusinessLogic\Service\" />
     <Folder Include="Framework\Configuration\" />
     <Folder Include="Framework\Extensions\" />
     <Folder Include="Framework\FilterAttributes\" />
     <Folder Include="Framework\Jwt\" />
-    <Folder Include="Migrations\" />
+    <Folder Include="Profiles\" />
     <Folder Include="ReportModels\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.8">

@@ -13,7 +13,7 @@ namespace Esoft.Core.Entity.Data.CourseModels
 	{
 		[Key]
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-		public int CourseId { get; set; }
+		public int Id { get; set; }
 		public string CourseName { get; set; }
 		public string Description { get; set; }
 		public ICollection<CourseRequirement> CourseRequirements { get; set; }

@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Esoft.Core.BusinessLogic.Interface
+namespace Esoft.Core.ApiInputModels.CoursesModels
 {
-	public interface ICourseCategory
+	public class CourseCategoryDto
 	{
+		public string CourseCategory { get; set; }
+
 	}
 }
